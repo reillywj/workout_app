@@ -1,0 +1,9 @@
+<%= render "shared/content_title", title: "All Users" %>
+
+<div class="row collapse">
+  <%= link_to "Add User", new_user_path, class: "button large success"%>
+</div>
+
+<% @users.each do |user| %>
+  <%= render "user_summary", user: user %>
+<% end %>
