@@ -1,0 +1,13 @@
+<%= render "shared/content_title", title: "User Profile" %>
+
+<div class="row panel">
+  <%= link_to(edit_user_path(@user), class: "button radius info right tiny") do %>
+    <i class="fi-pencil"></i>
+  <% end %>
+  <% @user.roles.each do |role| %>
+    <span class="success round label right">role.role</span>
+  <% end %>
+  <h4><%= @user.name %></h4>
+  Email: <%= @user.email %>
+
+</div>

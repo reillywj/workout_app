@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit]
+  before_action :set_user, only: [:show, :edit, :update]
   before_action :user_params, only: [:create, :update]
 
   def index
@@ -13,21 +13,26 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = User.new(user_params)
-    binding.pry
     if @user.save
       flash[:notice] = "User created successfully."
       redirect_to user_path(@user)
     else
       flash[:error] = "Invalid entry."
-      render :edit
+      render :new
     end
   end
 
   def edit; end
 
   def update
+    if @user.update(user_params)
+      flash[:notice] = "User profile updated successfully."
+      redirect_to user_path(@user)
+    else
+      flash[:notice] = "Invalid entry."
+      render :edit
+    end
   end
 
   private

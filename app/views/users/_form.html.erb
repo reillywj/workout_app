@@ -12,5 +12,15 @@
       <%= f.text_field :email %>
     </div>
   </div>
+  <% Role.all.sort{|x,y| x.role <=> y.role}.each do |role| %>
+    <div class="row">
+      <div class="small-10">
+        <%= fields_for :roles do |builder| %>
+          <%= builder.label role.id, "#{role.role}:" %>
+          <%= builder.check_box role.role %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <%= f.submit submit_text, class: "button radius success" %>
 <% end %>
