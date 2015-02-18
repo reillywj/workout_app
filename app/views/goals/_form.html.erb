@@ -1,0 +1,16 @@
+<%= form_for [goalable_object, @goal] do |f| %>
+  <%= render "shared/errors", object: @goal %>
+
+  <div class="row">
+    <div class="large-8 columns">
+      <div class="row collapse">
+        <div class="small-10 columns">
+        <%= f.text_field :description, placeholder: "Enter goal..."%>
+        </div>
+        <div class="small-2 columns">
+          <%= f.submit submit_text, class: "button postfix" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

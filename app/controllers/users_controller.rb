@@ -6,7 +6,9 @@ class UsersController < ApplicationController
     @users = User.all.sort{|x,y| x.name <=> y.name}
   end
 
-  def show; end
+  def show
+    @goal = Goal.new(goalable: @user)
+  end
 
   def new
     @user = User.new
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    # params.require(:user).permit(:name, :email, :password, :role_ids)
+    params.require(:user).permit!
   end
 end

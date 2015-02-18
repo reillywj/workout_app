@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: "users#index"
 
-  resources :users, only: [:index, :show, :new, :create, :edit, :update]
+  resources :users, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :goals, only: [:create, :edit, :update, :destroy]
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

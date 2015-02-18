@@ -4,10 +4,26 @@
   <%= link_to(edit_user_path(@user), class: "button radius info right tiny") do %>
     <i class="fi-pencil"></i>
   <% end %>
-  <% @user.roles.each do |role| %>
-    <span class="success round label right">role.role</span>
-  <% end %>
   <h4><%= @user.name %></h4>
+  <% @user.roles.each do |role| %>
+    <span class="success round label"><%= role.role %></span>
+  <% end %>
+  <br/>
+  <br/>
   Email: <%= @user.email %>
 
+</div>
+
+<div class="row panel">
+  <%= render "goals/form", submit_text: "Add", goalable_object: @user %>
+  <div class="row collapse">
+  <h4><%= pluralize(@user.goals.size, "Goal") %></h4>
+    <ul>
+      <% @user.goals.each do |goal| %>
+        <li>
+          <%= goal.description %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>

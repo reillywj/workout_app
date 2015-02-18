@@ -12,15 +12,14 @@
       <%= f.text_field :email %>
     </div>
   </div>
-  <% Role.all.sort{|x,y| x.role <=> y.role}.each do |role| %>
-    <div class="row">
-      <div class="small-10">
-        <%= fields_for :roles do |builder| %>
-          <%= builder.label role.id, "#{role.role}:" %>
-          <%= builder.check_box role.role %>
-        <% end %>
-      </div>
+
+  <div class="row collapse">
+    <div class="small-12 large-12 columns">
+      <%= f.label "Role" %>
+      <%= f.collection_check_boxes :role_ids, Role.all.sort{|x,y| x.role.downcase <=> y.role.downcase}, :id, :role do |cb| %>
+        <%= cb.label(class: "checkbox small-2 columns") {cb.check_box(class: "inline") + " " +cb.text}%>
+      <% end %>
     </div>
-  <% end %>
+  </div>
   <%= f.submit submit_text, class: "button radius success" %>
 <% end %>
