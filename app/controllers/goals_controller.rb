@@ -1,9 +1,11 @@
 class GoalsController < ApplicationController
-  before_action :context, only: [:create, :edit, :update]
+  before_action :context, only: [:create, :edit, :update, :destroy]
 
   def create
     binding.pry
     @goal = Goal.new(goal_params)
+    @goal.visibility = true
+    @goal.status = "active"
     if @goal.save
       @goal.goalable = @context
       @goal.save
@@ -13,6 +15,12 @@ class GoalsController < ApplicationController
       flash[:error] = "Invalid goal."
       redirect_to context_url(context)
     end
+  end
+
+  def destroy
+    binding.pry
+    Goal.find(params[:id]).delete
+    redirect_to user_path(@context)
   end
 
   private

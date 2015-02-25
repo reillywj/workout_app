@@ -1,0 +1,27 @@
+<%= render "shared/content_title", title: "#{link_to(@cycle.athlete.name, @cycle.athlete)} > Workout Cycle".html_safe %>
+
+<%= link_to "Add Workout", new_user_cycle_workout_path(@cycle.athlete, @cycle) %>
+
+<ul class="tabs" data-tab>
+  <% for j in 1..@cycle.cycle_length_weeks do %>
+  <li class="tab-title <%= "active" if j == 1 %>"><a href="#week<%= j %>">Week <%= j %></a></li>
+  <% end %>
+</ul>
+
+<div class="tabs-content">
+  <% for j in 1..@cycle.cycle_length_weeks do %>
+    <div class="content <%= "active" if j==1%>" id="week<%= j %>">
+      <ul class="accordion" data-accordion>
+        <% for i in (1+(j-1)*5)..(5+(j-1)*5) do %>
+          <li class="accordion-navigation">
+            <a href="#workout<%= i %>">Workout <%= i %></a>
+            <div id="workout<%= i %>" class="content">
+              Render workout <%= i %>.
+            </div>
+          </li>
+        <% end %>
+
+      </ul>
+    </div>
+  <% end %>
+</div>

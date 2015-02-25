@@ -1,0 +1,3 @@
+<div class="row"><%= link_to "#{cycle.cycle_length_weeks} Week Cycle: #{cycle.description}", user_cycle_path(cycle.athlete, cycle) %></div>
+Start: <%= convert_date(cycle.start_date) %>
+End: <%= convert_date(cycle.end_date) %>

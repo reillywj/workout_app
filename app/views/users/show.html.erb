@@ -1,3 +1,5 @@
+<% num_user_cycles = @user.cycles.size %>
+
 <%= render "shared/content_title", title: "User Profile" %>
 
 <div class="row panel">
@@ -5,9 +7,7 @@
     <i class="fi-pencil"></i>
   <% end %>
   <h4><%= @user.name %></h4>
-  <% @user.roles.each do |role| %>
-    <span class="success round label"><%= role.role %></span>
-  <% end %>
+  <%= render "users/show_user_roles", user: @user%>
   <br/>
   <br/>
   Email: <%= @user.email %>
@@ -17,7 +17,7 @@
 <div class="row panel">
   <%= render "goals/form", submit_text: "Add", goalable_object: @user %>
   <div class="row collapse">
-  <h4><%= pluralize(@user.goals.size, "Goal") %></h4>
+    <h4><%= pluralize(@user.goals.size, "Goal") %></h4>
     <ul>
       <% @user.goals.each do |goal| %>
         <li>
@@ -25,5 +25,21 @@
         </li>
       <% end %>
     </ul>
+  </div>
+</div>
+<br/>
+
+<div class="row">
+  <%= link_to "Add Workout Cycle", new_user_cycle_path(@user), class: "button radius" %>
+
+  <div class="row collapse">
+    <h4><%= pluralize(num_user_cycles, "Workout Cycle") %></h4>
+    <% if num_user_cycles > 0 %>
+      <div class="row panel">
+        <% @user.cycles.each do |cycle| %>
+          <%= render "cycles/preview", cycle: cycle %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

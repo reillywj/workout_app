@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, through: :user_roles
   accepts_nested_attributes_for :roles
-  has_many :cycles
+  has_many :cycles, foreign_key: "athlete_id"
   has_many :goals, as: :goalable
+  has_many :workouts, through: :cycles
 
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true

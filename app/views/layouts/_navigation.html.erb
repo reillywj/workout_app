@@ -1,4 +1,4 @@
-<nav class="top-bar" data-topbar role="navigation">
+<nav class="top-bar top-bar-link-bg-hover-lightness" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
       <h1><%= link_to "Workout App", root_path%></h1>
@@ -8,12 +8,20 @@
 
   <section class="top-bar-section">
     <ul class="right">
-      <li><a href="#">Some Right Button</a></li>
       <li class="has-dropdown">
-        <a href="#"> Right Button Dropdown</a>
+        <a href="#"> Coaches </a>
         <ul class="dropdown">
-          <li><a href="#">1st Link in Dropdown</a></li>
-          <li><a href="#">2nd Link in Dropdown</a> </li>
+          <% User.all.select{|x| x.roles.include?(Role.find_by(role: "Coach"))}.sort{|x,y| x.name <=> y.name}.each do |user| %>
+            <li><%= link_to user.name, user_path(user) %></li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="has-dropdown">
+        <a href="#"> Athletes </a>
+        <ul class="dropdown">
+          <% User.all.select{|x| x.roles.include?(Role.find_by(role: "Athlete"))}.sort{|x,y| x.name <=> y.name}.each do |user| %>
+            <li><%= link_to user.name, user_path(user) %></li>
+          <% end %>
         </ul>
       </li>
     </ul>

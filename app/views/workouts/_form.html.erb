@@ -1,0 +1,16 @@
+<%= form_for [@workout.athlete, @workout.cycle, @workout] do |f| %>
+  <%= render "shared/errors", object: @cycle %>
+  <div class="row collapse">
+    <div class="medium-2">
+      <%= f.label :workout_date %>
+      <%= f.date_field :workout_date %>
+    </div>
+    <div class="medium-6">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, rows: 10 %>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.submit submit_text, class: "button radius centered large-6" %>
+  </div>
+<% end %>

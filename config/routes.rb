@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   root to: "users#index"
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :goals, only: [:create, :edit, :update, :destroy]
+    resources :goals, only: [:create, :edit, :update, :destroy] do
+
+    end
+
+    resources :cycles, only: [:show, :new, :create, :edit, :update] do
+      resources :workouts, only: [:new, :create, :edit, :update]
+    end
   end
 
 
