@@ -1,0 +1,17 @@
+<%= form_for [@exercise.category, @exercise] do |f| %>
+  <%= render "shared/errors", object: @exercise %>
+  <div class="row">
+    <div class="small-5">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5">
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname %>
+    </div>
+  </div>
+
+  <%= f.submit submit_text, class: "button radius success" %>
+<% end %>

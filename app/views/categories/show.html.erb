@@ -1,0 +1,22 @@
+<%= render "shared/content_title", title: @category.name %>
+
+<%= link_to "Add Exercise to Category", new_category_exercise_path(@category), class: "button small radius" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Exercise Name</th>
+      <th>Exercise Nickname</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @category.exercises.each do |exercise| %>
+      <tr>
+        <td><%= exercise.name %></td>
+        <td><%= exercise.nickname%></td>
+        <td><%= link_to "Edit", edit_category_exercise_path(exercise.category, exercise) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

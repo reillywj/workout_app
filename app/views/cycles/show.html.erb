@@ -1,4 +1,4 @@
-<%= render "shared/content_title", title: "#{link_to(@cycle.athlete.name, @cycle.athlete)} > Workout Cycle".html_safe %>
+<%= render "shared/content_title", title: "#{link_to(@cycle.athlete.name, @cycle.athlete)} > Workout Cycle: #{convert_date(@cycle.start_date)} to #{convert_date(@cycle.end_date)}".html_safe %>
 
 <%= link_to "Add Workout", new_user_cycle_workout_path(@cycle.athlete, @cycle) %>
 
@@ -11,12 +11,15 @@
 <div class="tabs-content">
   <% for j in 1..@cycle.cycle_length_weeks do %>
     <div class="content <%= "active" if j==1%>" id="week<%= j %>">
+      <% if @cycle.workouts.select{|workout| workout.week_in_cycle == j}.empty? %>
+        <%= link_to "Add Workout", new_user_cycle_workout_path(@cycle.athlete, @cycle), class: "button medium radius" %>
+      <% end %>
       <ul class="accordion" data-accordion>
-        <% for i in (1+(j-1)*5)..(5+(j-1)*5) do %>
+        <% @cycle.workouts.select{|workout| workout.week_in_cycle == j}.sort{|x,y| x.workout_date <=> y.workout_date}.each do |workout| %>
           <li class="accordion-navigation">
-            <a href="#workout<%= i %>">Workout <%= i %></a>
-            <div id="workout<%= i %>" class="content">
-              Render workout <%= i %>.
+            <a href="#workout<%= workout.workout_date %>">Workout <%= workout.workout_date %></a>
+            <div id="workout<%= workout.workout_date %>" class="content">
+              <%= render "workouts/workout" %>
             </div>
           </li>
         <% end %>

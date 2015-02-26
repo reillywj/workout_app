@@ -1,0 +1,11 @@
+<%= render "shared/content_title", title: "All Exercise Categories" %>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li>
+      <%= link_to category_path(category) do %>
+        <%= category.name %> (<%= category.abbreviation%>)
+      <% end %>
+    </li>
+  <% end %>
+</ul>

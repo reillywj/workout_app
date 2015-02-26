@@ -1,5 +1,8 @@
 class Workout < ActiveRecord::Base
   belongs_to :cycle
+  has_many :workout_exercises
+  has_many :exercises, through: :workout_exercises
+  
   validates :workout_date, presence: true
   validate :validate_date_within_cycle
 
