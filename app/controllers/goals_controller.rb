@@ -2,7 +2,6 @@ class GoalsController < ApplicationController
   before_action :context, only: [:create, :edit, :update, :destroy]
 
   def create
-    binding.pry
     @goal = Goal.new(goal_params)
     @goal.visibility = true
     @goal.status = "active"

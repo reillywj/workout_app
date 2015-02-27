@@ -23,7 +23,6 @@ class ExercisesController < ApplicationController
   end
 
   def update
-    binding.pry
     if @exercise.update(set_params)
       flash[:notice] = "Exercise updated!"
       redirect_to category_path(@exercise.category)

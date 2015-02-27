@@ -2,29 +2,41 @@
 
 <%= link_to "Add Workout", new_user_cycle_workout_path(@cycle.athlete, @cycle) %>
 
-<ul class="tabs" data-tab>
+<ul class="tabs" data-tab role="tablist">
   <% for j in 1..@cycle.cycle_length_weeks do %>
-  <li class="tab-title <%= "active" if j == 1 %>"><a href="#week<%= j %>">Week <%= j %></a></li>
+  <li class="tab-title <%= "active" if j == 1 %>" role="tab"><a href="#week<%= j %>">Week <%= j %></a></li>
   <% end %>
 </ul>
 
 <div class="tabs-content">
   <% for j in 1..@cycle.cycle_length_weeks do %>
     <div class="content <%= "active" if j==1%>" id="week<%= j %>">
+      <% exercise_count = 0 %>
       <% if @cycle.workouts.select{|workout| workout.week_in_cycle == j}.empty? %>
         <%= link_to "Add Workout", new_user_cycle_workout_path(@cycle.athlete, @cycle), class: "button medium radius" %>
       <% end %>
       <ul class="accordion" data-accordion>
         <% @cycle.workouts.select{|workout| workout.week_in_cycle == j}.sort{|x,y| x.workout_date <=> y.workout_date}.each do |workout| %>
           <li class="accordion-navigation">
-            <a href="#workout<%= workout.workout_date %>">Workout <%= workout.workout_date %></a>
-            <div id="workout<%= workout.workout_date %>" class="content">
+            <a href="#workout-<%= j %>-<%= exercise_count %>">Workout <%= workout.workout_date %></a>
+            <div id="workout-<%= j %>-<%= exercise_count %>" class="content">
               <%= render "workouts/workout" %>
             </div>
           </li>
+          <% exercise_count += 1 %>
         <% end %>
 
       </ul>
     </div>
   <% end %>
 </div>
+
+<script>
+  $(document).foundation({
+    tab: {
+      callback : function (tab) {
+        console.log(tab);
+      }
+    }
+  });
+</script>

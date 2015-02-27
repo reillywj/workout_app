@@ -9,7 +9,7 @@ class Workout < ActiveRecord::Base
   def validate_date_within_cycle
     cycle = self.cycle
     unless (self.workout_date >= cycle.start_date) && (self.workout_date <= cycle.end_date)
-      errors.add(:workout_date, "must fall within its cycle's start and end dates")
+      errors.add(:workout_date, "must fall within its cycle's start (#{self.cycle.start_date}) and end dates (#{self.cycle.end_date})")
     end
   end
 
