@@ -1,4 +1,4 @@
-<%= form_for [@exercise.category, @exercise] do |f| %>
+<%= form_for [@exercise.subcategory.category, @exercise.subcategory, @exercise] do |f| %>
   <%= render "shared/errors", object: @exercise %>
   <div class="row">
     <div class="small-5">
@@ -10,6 +10,11 @@
     <div class="small-5">
       <%= f.label :nickname %>
       <%= f.text_field :nickname %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-4">
+        <%= collection_select(:exercise, :subcategory_id, Subcategory.all.select{|x| x.category_id == @exercise.subcategory.category_id}, :id, :name) %>
     </div>
   </div>
 

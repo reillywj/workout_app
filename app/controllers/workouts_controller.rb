@@ -10,10 +10,10 @@ class WorkoutsController < ApplicationController
     @workout = Workout.new(set_params)
     @workout.cycle = @cycle
     if @workout.save
-      flash[:notice] = "Workout created."
+      flash[:success] = "Workout created."
       redirect_to user_cycle_path(@workout.athlete, @workout.cycle)
     else
-      flash[:error] = "Invalid workout."
+      flash[:alert] = "Invalid workout."
       render :new
     end
   end

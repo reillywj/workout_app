@@ -1,9 +1,6 @@
-<% user.roles.each do |role| %>
-  <% if role.role == "Coach" %>
-    <span class="success round label"><%= role.role %></span>
-  <% elsif role.role == "Athlete" %>
-    <span class="warning round label"><%= role.role %></span>
-  <% else %>
-    <span class="regular round label"><%= role.role %></span>
-  <% end %>
+<% role = user.role %>
+<% if role == "Coach" %>
+  <span class="success round label"><%= role %></span>
+<% elsif role == "Athlete" %>
+  <span class="warning round label"><%= role %></span>
 <% end %>

@@ -14,20 +14,7 @@
 
 </div>
 
-<div class="row panel">
-  <%= render "goals/form", submit_text: "Add", goalable_object: @user %>
-  <div class="row collapse">
-    <h4><%= pluralize(@user.goals.size, "Goal") %></h4>
-    <ul>
-      <% @user.goals.each do |goal| %>
-        <li>
-          <%= goal.description %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<br/>
+<br>
 
 <div class="row">
   <%= link_to "Add Workout Cycle", new_user_cycle_path(@user), class: "button radius" %>

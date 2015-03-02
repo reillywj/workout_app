@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories, only: [:index, :show, :new, :create, :edit, :update] do 
-    resources :exercises, only: [:show, :new, :create, :edit, :update]
+  resources :categories, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :subcategories, only: [:show, :new, :create, :edit, :update] do
+      resources :exercises, only: [:show, :new, :create, :edit, :update]
+    end
   end
 
 

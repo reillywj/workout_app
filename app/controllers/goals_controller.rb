@@ -8,10 +8,10 @@ class GoalsController < ApplicationController
     if @goal.save
       @goal.goalable = @context
       @goal.save
-      flash[:notice] = "Goal added."
+      flash[:success] = "Goal added."
       redirect_to context_url(context)
     else
-      flash[:error] = "Invalid goal."
+      flash[:alert] = "Invalid goal."
       redirect_to context_url(context)
     end
   end

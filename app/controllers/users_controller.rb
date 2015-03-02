@@ -17,10 +17,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "User created successfully."
+      flash[:success] = "User created successfully."
       redirect_to user_path(@user)
     else
-      flash[:error] = "Invalid entry."
+      flash[:alert] = "Invalid entry."
       render :new
     end
   end
@@ -29,10 +29,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "User profile updated successfully."
+      flash[:success] = "User profile updated successfully."
       redirect_to user_path(@user)
     else
-      flash[:notice] = "Invalid entry."
+      flash[:alert] = "Invalid entry."
       render :edit
     end
   end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    # params.require(:user).permit(:name, :email, :password, :role_ids)
+    # params.require(:user).permit(:name, :email, :password, :role)
     params.require(:user).permit!
   end
 end

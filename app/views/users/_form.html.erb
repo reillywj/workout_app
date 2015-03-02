@@ -13,12 +13,10 @@
     </div>
   </div>
 
-  <div class="row collapse">
-    <div class="small-12 large-12 columns">
-      <%= f.label "Role" %>
-      <%= f.collection_check_boxes :role_ids, Role.all.sort{|x,y| x.role.downcase <=> y.role.downcase}, :id, :role do |cb| %>
-        <%= cb.label(class: "checkbox small-2 columns") {cb.check_box(class: "inline") + " " +cb.text}%>
-      <% end %>
+  <div class="row">
+    <div class="small-12 large-3">
+      <%= f.label :role %>
+      <%= f.select :role, [["Athlete"],["Coach"]] %>
     </div>
   </div>
   <%= f.submit submit_text, class: "button radius success" %>

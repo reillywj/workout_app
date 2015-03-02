@@ -15,10 +15,10 @@ class CyclesController < ApplicationController
     @cycle.athlete = @user
 
     if @cycle.save
-      flash[:notice] = "New workout cycle successfully created."
+      flash[:success] = "New workout cycle successfully created."
       redirect_to user_path(@user)
     else
-      flash[:errors] = "Invalid cycle created."
+      flash[:alert] = "Invalid cycle created."
       render :new
     end
   end

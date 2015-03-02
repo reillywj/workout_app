@@ -1,6 +1,6 @@
 <div class="panel">
   <%= link_to "Edit", edit_user_path(user), class: "button tiny radius right" %>
+  <div class="left" style="margin-right:1.0rem;"><%= render "users/show_user_roles", user: user %></div>
   <h4><%= link_to user.name, user_path(user) %></h4>
-  <%= render "users/show_user_roles", user: user %>
 
 </div>

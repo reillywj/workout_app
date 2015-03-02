@@ -13,7 +13,7 @@
       <li class="has-dropdown not-click">
         <a href="#"> Coaches </a>
         <ul class="dropdown">
-          <% User.all.select{|x| x.roles.include?(Role.find_by(role: "Coach"))}.sort{|x,y| x.name <=> y.name}.each do |user| %>
+          <% User.all.select{|x| x.role == "Coach"}.sort{|x,y| x.name <=> y.name}.each do |user| %>
             <li><%= link_to user.name, user_path(user) %></li>
           <% end %>
         </ul>
@@ -21,15 +21,7 @@
       <li class="has-dropdown not-click">
         <a href="#"> Athletes </a>
         <ul class="dropdown">
-          <% User.all.select{|x| x.roles.include?(Role.find_by(role: "Athlete"))}.sort{|x,y| x.name <=> y.name}.each do |user| %>
-            <li><%= link_to user.name, user_path(user) %></li>
-          <% end %>
-        </ul>
-      </li>
-      <li class="has-dropdown not-click">
-        <a href="#"> Parents </a>
-        <ul class="dropdown">
-          <% User.all.select{|x| x.roles.include?(Role.find_by(role: "Parent"))}.sort{|x,y| x.name <=> y.name}.each do |user| %>
+          <% User.all.select{|x| x.role == "Athlete"}.sort{|x,y| x.name <=> y.name}.each do |user| %>
             <li><%= link_to user.name, user_path(user) %></li>
           <% end %>
         </ul>
@@ -42,7 +34,12 @@
           <li><%= link_to "Add Category", new_category_path %></li>
           <li class="divider"></li>
           <% categories.each do |category| %>
-            <li><%= link_to category.name, category_path(category)%></li>
+            <li class="has-dropdown not-click">
+              <%= link_to "#{category.name} (#{category.abbreviation})", category_path(category)%>
+              <ul class="dropdown">
+                <li><%= link_to "Add Subcategory to #{category.abbreviation}", new_category_subcategory_path(category)%></li>
+              </ul>
+            </li>
           <% end %>
         </ul>
       </li>

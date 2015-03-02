@@ -1,0 +1,12 @@
+<%= form_for @category do |f| %>
+  <%= render "shared/errors", object: @category %>
+  <div class="large-4">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="large-1">
+    <%= f.label :abbreviation %>
+    <%= f.text_field :abbreviation%>
+  </div>
+  <%= f.submit submit_text, class: "button small radius" %>
+<% end %>

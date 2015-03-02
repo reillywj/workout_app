@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227024155) do
+ActiveRecord::Schema.define(version: 20150302023745) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150227024155) do
     t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
+    t.integer  "subcategory_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -47,15 +47,9 @@ ActiveRecord::Schema.define(version: 20150227024155) do
     t.string   "status"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
+  create_table "subcategories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150227024155) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
   end
 
   create_table "workout_exercise_sets", force: :cascade do |t|

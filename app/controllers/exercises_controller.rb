@@ -1,19 +1,19 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:edit, :update]
   def new
-    @category = Category.find(params[:category_id])
-    @exercise = Exercise.new(category: @category)
+    @subcategory = Subcategory.find(params[:subcategory_id])
+    @exercise = Exercise.new(subcategory: @subcategory)
   end
 
   def create
-    @category = Category.find(params[:category_id])
+    @subcategory = Subcategory.find(params[:subcategory_id])
     @exercise = Exercise.new(set_params)
-    @exercise.category = @category
+    @exercise.subcategory = @subcategory
     if @exercise.save
-      flash[:notice] = "Exercise created."
-      redirect_to category_path(@category)
+      flash[:success] = "Exercise created."
+      redirect_to category_path(@subcategory.category)
     else
-      flash[:error] = "Invalid exercise."
+      flash[:alert] = "Invalid exercise."
       render :new
     end
   end
@@ -24,17 +24,17 @@ class ExercisesController < ApplicationController
 
   def update
     if @exercise.update(set_params)
-      flash[:notice] = "Exercise updated!"
-      redirect_to category_path(@exercise.category)
+      flash[:success] = "Exercise updated!"
+      redirect_to category_path(@exercise.subcategory.category)
     else
-      flash[:error] = "Invalid update."
+      flash[:alert] = "Invalid update."
       render :edit
     end
   end
 
   private
   def set_params
-    params.require(:exercise).permit(:name, :nickname)
+    params.require(:exercise).permit(:name, :nickname, :subcategory_id)
   end
 
   def set_exercise
