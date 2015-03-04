@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     end
 
     resources :cycles, only: [:show, :new, :create, :edit, :update] do
-      resources :workouts, only: [:new, :create, :edit, :update]
+      resources :workouts, only: [:new, :create, :edit, :update] do
+        resources :workout_exercises, only: [:new, :create, :edit, :update]
+      end
     end
   end
 

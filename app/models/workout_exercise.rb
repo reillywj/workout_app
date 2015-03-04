@@ -3,5 +3,6 @@ class WorkoutExercise < ActiveRecord::Base
   belongs_to :exercises
   has_many :workout_exercise_sets
 
-  validates :order, presence: true, uniqueness: {scope: :workout, message: "should be unique to this workout."}
+  validates :order, presence: true
+  validates_uniqueness_of :order, scope: :workout, case_sensitive: false
 end

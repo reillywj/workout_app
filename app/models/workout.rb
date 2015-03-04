@@ -2,6 +2,10 @@ class Workout < ActiveRecord::Base
   belongs_to :cycle
   has_many :workout_exercises
   has_many :exercises, through: :workout_exercises
+  has_many :workout_exercise_sets, through: :workout_exercises
+
+  accepts_nested_attributes_for :workout_exercises, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :workout_exercise_sets
   
   validates :workout_date, presence: true
   validate :validate_date_within_cycle

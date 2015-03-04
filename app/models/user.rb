@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :goals, as: :goalable
   has_many :workouts, through: :cycles
 
-  validates :email, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true, case_sensitive: false
   validates :name, presence: true
 
   def user_must_have_at_least_one_role

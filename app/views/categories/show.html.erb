@@ -3,7 +3,7 @@
 <%= link_to "New Subcategory for #{@category.name}", new_category_subcategory_path(@category), class: "button tiny radius" %>
 
 <hr>
-<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4">
+<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
   <% @category.subcategories.each do |subcat| %>
     <li>
       <strong><%= subcat.name %></strong>

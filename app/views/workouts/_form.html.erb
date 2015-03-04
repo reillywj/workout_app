@@ -7,13 +7,13 @@
     </div>
     <div class="medium-6">
       <%= f.label :notes %>
-      <%= f.text_area :notes, rows: 10 %>
+      <%= f.text_area :notes, rows: 5 %>
     </div>
   </div>
+
   <div class="row collapse">
-    <p>Exercise stuff goes here.</p>
-  </div>
-  <div class="row">
-    <%= f.submit submit_text, class: "button radius centered large-6" %>
+    <%= f.submit submit_text, class: "button radius centered large-6 warning" %>
   </div>
 <% end %>
+
+<%= link_to "Back to Cycle Page", user_cycle_path(@workout.athlete, @workout.cycle), class: "button radius success large-6" %>

@@ -1,42 +1,38 @@
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Exercise</th>
-      <th>Set 1</th>
-      <th>Set 2</th>
-      <th>Set 3</th>
-      <th>Set 4</th>
-      <th>Set 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Some exercise will go here</td>
-      <td>set 1 info</td>
-      <td>set 2 info</td>
-      <td>set 3 info</td>
-      <td>set 4 info</td>
-      <td>set 5 info</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Some exercise will go here</td>
-      <td>set 1 info</td>
-      <td>set 2 info</td>
-      <td>set 3 info</td>
-      <td>set 4 info</td>
-      <td>set 5 info</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Some exercise will go here</td>
-      <td>set 1 info</td>
-      <td>set 2 info</td>
-      <td>set 3 info</td>
-      <td>set 4 info</td>
-      <td>set 5 info</td>
-    </tr>
-  </tbody>
-</table>
+<% unless workout.workout_exercises.empty? %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Edit</th>
+        <th>#</th>
+        <th>Exercise</th>
+        <th>Set 1</th>
+        <th>Set 2</th>
+        <th>Set 3</th>
+        <th>Set 4</th>
+        <th>Set 5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% workout.workout_exercises.sort_by{:order}.each do |exercise| %>
+        <tr>
+          <td><%= link_to "Edit", edit_user_cycle_workout_workout_exercise_path(workout.athlete, workout.cycle, workout)%></td>
+          <td><%= exercise.order %></td>
+          <td><%= exercise.exercise.name %></td>
+          <% exercise.workout_exercise_sets.sort_by{:set_number}.each do |set| %>
+          <td>
+            <% if set.reps_completed.size > 0 %>
+              <%= "#{set.reps_completed}#{rep.rep_units} x #{set.amount_completed} #{work_units}"%>
+            <% else %>
+              <%= "Do #{set.reps_todo}#{rep.rep_units} x #{set.amount_todo} #{work_units}"%> with RPE of <%= set.relative_perceived_exertion %>
+            <% end %>
+          </td>
+          <% end %>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to "Add", new_user_cycle_workout_workout_exercise_path(workout.athlete, workout.cycle, workout), class: "button radius" %>
