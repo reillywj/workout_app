@@ -16,7 +16,7 @@
     <tbody>
       <% workout.workout_exercises.sort_by{:order}.each do |exercise| %>
         <tr>
-          <td><%= link_to "Edit", edit_user_cycle_workout_workout_exercise_path(workout.athlete, workout.cycle, workout)%></td>
+          <td><%= link_to "Edit", edit_user_cycle_workout_workout_exercise_path(workout.athlete, workout.cycle, workout, exercise)%></td>
           <td><%= exercise.order %></td>
           <td><%= exercise.exercise.name %></td>
           <% exercise.workout_exercise_sets.sort_by{:set_number}.each do |set| %>
@@ -28,6 +28,7 @@
             <% end %>
           </td>
           <% end %>
+          <td><%= link_to "Add Set", </td>
           
         </tr>
       <% end %>

@@ -1,6 +1,6 @@
 class WorkoutExercise < ActiveRecord::Base
-  belongs_to :workouts
-  belongs_to :exercises
+  belongs_to :workout
+  belongs_to :exercise
   has_many :workout_exercise_sets
 
   validates :order, presence: true

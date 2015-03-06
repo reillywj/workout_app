@@ -1,0 +1,18 @@
+<%= form_for [@workout_exercise.workout.cycle.athlete, @workout_exercise.workout.cycle, @workout_exercise.workout, @workout_exercise] do |f| %>
+  <%= render "shared/errors", object: @workout_exercise %>
+  <div class="row">
+    <div class="small-3">
+      <%= collection_select :workout_exercise, :exercise_id, Exercise.all.sort_by{|x| x.subcategory}.sort_by{|x| x.subcategory.category}, :id, :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-2">
+      <%= f.label :order %>
+      <%= f.select :order, 1..10 %>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.submit submit_text, class: "button radius success" %>
+  </div>
+<% end %>
